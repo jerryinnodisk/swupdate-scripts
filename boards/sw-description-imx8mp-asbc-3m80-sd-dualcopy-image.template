@@ -1,0 +1,36 @@
+software =
+{
+	version = "1.0";
+	description = "Firmware update for test Project";
+	hardware-compatibility: [ "1.0", "1.2", "1.3"];
+	imx8mp-asbc-3m80: {
+		images: (
+			{
+				filename = "slotb_boot_pt_120M.mirror";
+				sha256 = "<slotb_boot_pt_120M.mirror_sha256>";
+				device = "/dev/mmcblk1p3";
+			},
+			{
+				filename = "imx-image-full-imx8mp-asbc-3m80.ext4";
+				sha256 = "<imx-image-full-imx8mp-asbc-3m80.ext4_sha256>";
+				device = "/dev/mmcblk1p4";
+			},
+			{
+				filename = "imx-boot-imx8mp-asbc-3m80-sd.bin-flash_evk";
+				sha256 = "<imx-boot-imx8mp-asbc-3m80-sd.bin-flash_evk_sha256>";
+				device = "/dev/mmcblk1";
+				offset = "32K";
+			}
+		);
+		bootenv: (
+			{
+				name = "upgrade_available";
+				value = "1";
+			},
+			{
+				name = "bootslot";
+				value = "dualB";
+			}
+		);
+	}
+}
